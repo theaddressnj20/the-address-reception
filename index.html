@@ -1,1 +1,11 @@
-the-address-reception-v6.html
+-- STAFF NOTES TABLE
+create table if not exists staff_notes (
+  id bigint generated always as identity primary key,
+  from_name text not null,
+  to_name text,
+  body text not null,
+  created_at timestamptz default now()
+);
+ 
+alter table staff_notes enable row level security;
+create policy "Allow all staff_notes" on staff_notes for all using (true) with check (true);
